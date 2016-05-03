@@ -2,6 +2,7 @@
     "dependencies":[
         {"require-run": "jquery"},
         "jquery-next-id",
+        "jquery-common-keydown",
         "jquery-focusable",
         "jquery-keyboard-trap",
         "jquery-screenreader-trap",

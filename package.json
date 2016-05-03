@@ -39,6 +39,7 @@
     "eslint-config-google": "^0.4.0",
     "jquery": "^2.2.3",
     "jquery-next-id": "~0.0.16",
+    "jquery-common-keydown": "0.0.4",
     "jquery-focusable": "~0.2.3",
     "jquery-keyboard-trap": "~0.2.3",
     "jquery-screenreader-trap": "~0.2.2",
@@ -49,6 +50,7 @@
   "peerDependencies": {
     "jquery": ">=1.11 < 3",
     "jquery-next-id": "~0.0.16",
+    "jquery-common-keydown": "0.0.4",
     "jquery-focusable": "~0.2.3",
     "jquery-keyboard-trap": "~0.2.3",
     "jquery-screenreader-trap": "~0.2.2"
