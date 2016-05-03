@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Demo: jquery-dialog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <style>
+
+        </style>
+    </head>
+    <body>
+        <div role="main">
+            <h1>Demo: jquery-dialog</h1>
+            <p>jQuery plugin that creates the basic interactivity for an ARIA dialog widget.</p>
+            <p>Don't pay too much attention to the style here, it's only for demonstration purposes ;-)</p>
+
+            <div>
+                <button type="button" class="dialog-button" aria-controls="dialog-0">Open Dialog</button>
+                <div role="dialog" class="dialog" id="dialog-0" aria-labelledby="dialog-0-title" aria-hidden="true">
+                    <div role="document">
+                         <header>
+                            <button aria-label="Close Dialog" type="button"></button>
+                            <h2 id="dialog-0-title">Notifications</h2>
+                        </header>
+                        <div>
+                            <!-- dialog content goes here -->
+                            <p>The dialog content goes here.</p>
+                            <a href="http://www.ebay.com">www.ebay.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="browser.js"></script>
+        <script>
+            $(function() {
+                $('.dialog-button').dialogButton().on('click', function(e) {
+                    console.log(e);
+                });
+            });
+        </script>
+    </body>
+</html>

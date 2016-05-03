@@ -1,0 +1,10 @@
+{
+    "dependencies":[
+        {"require-run": "jquery"},
+        "jquery-next-id",
+        "jquery-focusable",
+        "jquery-keyboard-trap",
+        "jquery-screenreader-trap",
+        "jquery.dialog.js"
+    ]
+}
