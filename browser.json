@@ -1,6 +1,7 @@
 {
     "dependencies":[
         {"require-run": "jquery"},
+        "node_modules/jquery-migrate/dist/jquery-migrate.min.js",
         "jquery-next-id",
         "jquery-common-keydown",
         "jquery-focusable",
