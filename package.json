@@ -1,7 +1,7 @@
 {
   "name": "jquery-dialog",
   "description": "jQuery plugin that creates the basic interactivity for an ARIA dialog widget.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "start": "watch 'npm run lasso' --interval=10",
     "prepublish": "npm run clean && npm run lint && npm run build",
