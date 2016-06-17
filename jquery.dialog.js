@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.1.1
+* @version 0.1.2
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -99,7 +99,7 @@
 
                 // dialog must always focus on an interactive element
                 // if none found, set focus to doc
-                if ($focusable.size() === 0) {
+                if ($focusable.length === 0) {
                     $doc.attr('tabindex', '-1').focus();
                 } else {
                     $focusable.first().focus();
