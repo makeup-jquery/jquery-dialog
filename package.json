@@ -3,13 +3,13 @@
   "description": "jQuery plugin that creates the basic interactivity for an ARIA dialog widget.",
   "version": "0.1.2",
   "scripts": {
-    "start": "watch 'npm run lasso' --interval=10",
+    "start": "onchange 'jquery.dialog.js' -- npm run lasso",
     "prepublish": "npm run clean && npm run lint && npm run build",
     "build": "npm run clean && npm run lasso && npm run minify",
-    "clean": "rimraf *.min.js lint.txt",
+    "clean": "rimraf lint.txt",
     "fix": "eslint jquery.dialog.js --fix",
     "lint": "eslint jquery.dialog.js > lint.txt",
-    "lasso": "lasso browser.json --output-dir ./ --minify",
+    "lasso": "lasso browser.json --output-dir ./ --minify && rimraf build",
     "minify": "jsmin -o jquery.dialog.min.js jquery.dialog.js"
   },
   "pre-commit": "prepublish",
@@ -35,17 +35,17 @@
     "eslint": "^2.12.0",
     "eslint-config-google": "^0.4.0",
     "jquery": ">=1.11",
-    "jquery-next-id": "~0.1.0",
     "jquery-common-keydown": "0.1.1",
     "jquery-focusable": "~0.3.0",
     "jquery-keyboard-trap": "~0.3.0",
     "jquery-migrate": "^1.4.1",
+    "jquery-next-id": "~0.1.0",
     "jquery-screenreader-trap": "~0.3.0",
     "jsmin": "^1.0.1",
-    "nodemon": "^1.9.2",
+    "lasso-cli": "^2.0.6",
+    "onchange": "^2.5.0",
     "pre-commit": "^1.1.3",
-    "rimraf": "^2.5.2",
-    "watch": "^0.18.0"
+    "rimraf": "^2.5.2"
   },
   "peerDependencies": {
     "jquery": ">=1.11",
