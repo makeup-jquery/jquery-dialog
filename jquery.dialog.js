@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.1.2
+* @version 0.2.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -56,10 +56,11 @@
             * @method close
             * @return void
             */
-            function close() {
+            function close(e) {
+                console.log(this, e);
                 window.clearTimeout(openTimeout);
                 $closeButton.off('click', close);
-                $(document).off('escapeKeyDown', close);
+                $dialog.off('escapeKeyDown', close);
                 $.untrapKeyboard();
                 $.untrapScreenreader();
                 $body.removeClass('has-dialog');
@@ -115,7 +116,7 @@
                 $body.addClass('has-dialog');
 
                 // dialog must be closed on esc key
-                $(document).commonKeyDown().on('escapeKeyDown', close);
+                $dialog.commonKeyDown().on('escapeKeyDown', close);
 
                 $closeButton.on('click', close);
 
