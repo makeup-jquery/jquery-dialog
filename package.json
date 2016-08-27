@@ -5,11 +5,10 @@
   "scripts": {
     "start": "npm run build && onchange 'jquery.dialog.js' -- npm run lasso",
     "prepublish": "npm run clean && npm run lint && npm run build",
-    "build": "npm run clean && npm run lasso && npm run minify",
+    "build": "npm run clean && npm run minify",
     "clean": "rimraf lint.txt",
     "fix": "eslint jquery.dialog.js --fix",
     "lint": "eslint jquery.dialog.js > lint.txt",
-    "lasso": "lasso browser.json --output-dir ./ --minify && rimraf build",
     "minify": "jsmin -o jquery.dialog.min.js jquery.dialog.js"
   },
   "pre-commit": "prepublish",
@@ -37,7 +36,7 @@
     "jquery": ">=1.11",
     "jquery-common-keydown": "~0.2.2",
     "jquery-focusable": "~0.3.0",
-    "jquery-keyboard-trap": "~0.3.0",
+    "jquery-keyboard-trap": "~0.4.0",
     "jquery-migrate": "^1.4.1",
     "jquery-next-id": "~0.1.0",
     "jquery-screenreader-trap": "~0.3.0",
@@ -52,7 +51,7 @@
     "jquery-next-id": "~0.1.0",
     "jquery-common-keydown": "~0.2.2",
     "jquery-focusable": "~0.3.0",
-    "jquery-keyboard-trap": "~0.3.0",
+    "jquery-keyboard-trap": "~0.4.0",
     "jquery-screenreader-trap": "~0.3.0"
   },
   "publishConfig": {

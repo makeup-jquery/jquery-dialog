@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.0
+* @version 0.2.1
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -57,7 +57,6 @@
             * @return void
             */
             function close(e) {
-                console.log(this, e);
                 window.clearTimeout(openTimeout);
                 $closeButton.off('click', close);
                 $dialog.off('escapeKeyDown', close);
