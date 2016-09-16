@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.1
+* @version 0.2.2
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
