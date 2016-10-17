@@ -32,7 +32,7 @@
     "type": "git",
     "url": "https://github.com/ianmcburnie/jquery-dialog.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2",
     "eslint": "^3",
