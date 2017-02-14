@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.2.2
+* @version 0.3.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -18,7 +18,7 @@
     $.fn.dialogButton = function dialogButton(options) {
         return this.each(function onEach() {
             var $dialogButton = $(this);
-            var dialogId = $dialogButton.attr('aria-controls');
+            var dialogId = $dialogButton.data('jquery-dialog');
             var dialogOptions = options || $dialogButton.data('dialog');
             var $dialog = $('#' + dialogId);
 
@@ -63,7 +63,7 @@
                 $.untrapKeyboard();
                 $.untrapScreenreader();
                 $body.removeClass('has-dialog');
-                $dialog.attr('aria-hidden', 'true');
+                $dialog.prop('hidden', true);
                 closeTimeout = setTimeout(function() {
                     $dialog.css('display', 'none');
                     $dialog.trigger('dialogClose');
@@ -93,7 +93,7 @@
 
             // wait a little time before triggering CSS transition
             openTimeout = setTimeout(function() {
-                $dialog.attr('aria-hidden', 'false');
+                $dialog.prop('hidden', false);
                 // find all focusable elements inside dialog
                 $focusable = ($autoFocusable.length > 0) ? $autoFocusable : $dialog.focusable();
 
