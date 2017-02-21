@@ -36,9 +36,8 @@
   "devDependencies": {
     "browser-sync": "^2",
     "eslint": "^3",
-    "eslint-config-google": "~0.6",
+    "eslint-config-google": "~0.7",
     "jquery": ">=1.11",
-    "jquery-common-keydown": "~0.3",
     "jquery-focusable": "~0.3",
     "jquery-keyboard-trap": "~0.4",
     "jquery-migrate": "^3",
@@ -54,7 +53,6 @@
   "peerDependencies": {
     "jquery": ">=1.11",
     "jquery-next-id": "~0.1",
-    "jquery-common-keydown": "~0.3",
     "jquery-focusable": "~0.3",
     "jquery-keyboard-trap": "~0.4",
     "jquery-screenreader-trap": "~0.3"

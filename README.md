@@ -21,10 +21,10 @@ Expected dialog markup adheres to [bones](https://github.com/ianmcburnie/bones#u
 
 Note the use of the 'hidden' attribute to ensure the dialog begins in a hidden state.
 
-To activate the dialog using a button, ensure that the data attribute refers to the id of the dialog:
+To activate the dialog using a button, ensure that the `jquery-dialog-button-for` data attribute refers to the id of the dialog:
 
 ```html
-<button class="dialog-button" data-jquery-dialog="dialog-0" type="button">Open Dialog</button>
+<button class="dialog-button" data-jquery-dialog-button-for="dialog-0" type="button">Open Dialog</button>
 ```
 
 Then call the dialogButton plugin on the button:
@@ -36,7 +36,7 @@ $('.dialog-button').dialogButton()
 Or, to activate the dialog at page load time, call the dialog plugin directly:
 
 ```js
-$('.dialog').dialog();
+$('#dialog-0').dialog();
 ```
 
 ## Events
