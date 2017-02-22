@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.4.0
+* @version 0.5.0
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -45,11 +45,8 @@
         );
         return this.each(function onEach() {
             var $dialog = $(this);
-            var dataTransitionOutDuration = $dialog.data('jquery-dialog-transition-out-duration');
-            var dataType = $dialog.data('jquery-dialog-type');
-            var transitionOutDuration = (dataTransitionOutDuration === undefined) ? options.transitionOutDuration : dataTransitionOutDuration;
-            var type = (dataTransitionOutDuration === undefined) ? 'dialog' : dataType;
-            var promptValue;
+            var dataHasTransitions = $dialog.data('jquery-dialog-transitions-enabled');
+            var hasTransitions = (dataHasTransitions === undefined) ? options.transitionsEnabled : dataHasTransitions;
             var $body = $('body');
             var $header = $dialog.find('.dialog__header');
             var $dialogBody = $dialog.find('.dialog__body');
@@ -63,87 +60,31 @@
             var openTimeout;
             var closeTimeout;
 
-            var onCloseButtonClick = function() {
-                close();
-            };
-
-            var onFormButtonClick = function() {
-                close();
-            };
-
             var onKeyDown = function(e) {
                 if (e.keyCode === 27) {
-                    close();
+                    close(e);
                 }
             };
 
-            $dialogForm.append($dialogFormChoice);
-
+            // submit button 'click' triggers before form 'submit' event
+            // use this opportunity to patch-in hidden value
             var onFormSubmitClick = function(e) {
                 var value = this.value || this.innerText;
                 $dialogFormChoice.attr('value', value);
             };
 
+            // dialog forms never submit, and always return serialzied data to caller
             var onFormSubmit = function(e) {
                 e.preventDefault();
-                close($(this).serializeArray());
+                close(e, $(this).serializeArray());
             };
 
             /**
-            * @method close
+            * @method open
             * @return void
             */
-            function close(data) {
-                window.clearTimeout(openTimeout);
-                $dialogForm.off('click', '[type=submit]', onFormSubmitClick);
-                $dialogForm.off('click', '[type=button]', onFormButtonClick);
-                $dialogForm.off('submit', onFormSubmit);
-                $closeButton.off('click', onCloseButtonClick);
-                $dialog.off('keydown', onKeyDown);
-                $.untrapKeyboard();
-                $.untrapScreenreader();
-                $body.removeClass('has-dialog');
-                $dialog.addClass('dialog--transition-out');
-                $dialogFormChoice.remove();
-                closeTimeout = setTimeout(function() {
-                    $dialog.prop('hidden', true);
-                    $dialog.removeClass('dialog--transition-out');
-                    $dialog.trigger('dialogClose', [data]);
-                }, transitionOutDuration);
-            }
-
-            // assign a unique id to the dialog widget
-            $dialog.nextId('dialog');
-
-            // heading needs an id to create programmatic label for dialog
-            $heading.nextId($dialog.prop('id') + '-title');
-
-            // setup the programmatic label
-            $dialog.attr('aria-labelledby', $heading.prop('id'));
-
-            // ensure dialog has role dialog
-            $dialog.attr('role', 'dialog');
-
-            // ensure header has role banner
-            // found issue in voiceover where banner role will suppress announcement of dialog role
-            // $header.attr('role', 'banner');
-
-            // clean up any untriggered closeTimeout
-            window.clearTimeout(closeTimeout);
-
-            $dialog.addClass('dialog--transition-in');
-
-            $dialogForm.on('click', '[type=submit]', onFormSubmitClick);
-            $dialogForm.on('click', '[type=button]', onFormButtonClick);
-
-            $dialogForm.on('submit', onFormSubmit);
-
-            $closeButton.on('click', onCloseButtonClick);
-
-            // wait a little time before triggering CSS transition
-            openTimeout = setTimeout(function() {
+            var open = function() {
                 $dialog.prop('hidden', false);
-                $dialog.removeClass('dialog--transition-in');
 
                 // find all focusable elements inside dialog
                 $focusable = ($autoFocusable.length > 0) ? $autoFocusable : $dialog.focusable();
@@ -165,15 +106,89 @@
                 // add hook to body for CSS
                 $body.addClass('has-dialog');
 
+                // listen for key down events
                 $dialog.on('keydown', onKeyDown);
 
+                // let observers know that the dialog is open for business
                 $dialog.trigger('dialogOpen');
-            }, 16);
+            };
+
+            /**
+            * @method close
+            * @return void
+            */
+            var close = function(e, data) {
+                $dialogForm.off('click', '[type=submit]', onFormSubmitClick);
+                $dialogForm.off('click', '[type=button]', close);
+                $dialogForm.off('submit', onFormSubmit);
+                $closeButton.off('click', close);
+                $dialog.off('keydown', onKeyDown);
+                $dialogFormChoice.remove();
+                $.untrapKeyboard();
+                $.untrapScreenreader();
+                $body.removeClass('has-dialog');
+
+                if (hasTransitions === true) {
+                    window.clearTimeout(openTimeout);
+                    $dialog.addClass('dialog--transition-out');
+                    $dialogWindow.one('transitionend', function(e) {
+                        $dialog.removeClass('dialog--transition-out');
+                        $dialog.prop('hidden', true);
+                        $dialog.trigger('dialogClose', [data]);
+                    });
+                } else {
+                    $dialog.prop('hidden', true);
+                    $dialog.trigger('dialogClose', [data]);
+                }
+            };
+
+            $dialogForm.append($dialogFormChoice);
+
+            // assign a unique id to the dialog widget
+            $dialog.nextId('dialog');
+
+            // heading needs an id to create programmatic label for dialog
+            $heading.nextId($dialog.prop('id') + '-title');
+
+            // setup the programmatic label
+            $dialog.attr('aria-labelledby', $heading.prop('id'));
+
+            // ensure dialog has role dialog
+            $dialog.attr('role', 'dialog');
+
+            // ensure header has role banner
+            // found issue in voiceover where banner role will suppress announcement of dialog role
+            // $header.attr('role', 'banner');
+
+            $dialogForm.on('click', '[type=submit]', onFormSubmitClick);
+
+            $dialogForm.on('click', '[type=button]', close);
+
+            $dialogForm.on('submit', onFormSubmit);
+
+            $closeButton.on('click', close);
+
+            if (hasTransitions === true) {
+                // clean up any untriggered closeTimeout
+                window.clearTimeout(closeTimeout);
+
+                // prime the CSS transition (this class should set display to block)
+                $dialog.addClass('dialog--transition-in');
+
+                // wait a little time before triggering CSS transition
+                openTimeout = setTimeout(function() {
+                    open();
+                    $dialog.removeClass('dialog--transition-in');
+                }, 16);
+            } else {
+                open();
+            }
         });
     };
 }(jQuery));
 
 $.fn.dialog.defaults = {
+    transitionsEnabled: false,
     transitionOutDuration: 0
 };
 

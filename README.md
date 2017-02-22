@@ -30,7 +30,7 @@ To activate the dialog using a button, ensure that the `jquery-dialog-button-for
 Then call the dialogButton plugin on the button:
 
 ```js
-$('.dialog-button').dialogButton()
+$('.dialog-button').dialogButton();
 ```
 
 Or, to activate the dialog at page load time, call the dialog plugin directly:
