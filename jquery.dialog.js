@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.5.0
+* @version 0.5.1
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -52,7 +52,7 @@
             var $dialogBody = $dialog.find('.dialog__body');
             var $heading = $header.find('> h2');
             var $dialogWindow = $dialog.find('.dialog__window'); // role=document is for older NVDA
-            var $closeButton = $header.find('.dialog__close');
+            var $closeButton = $header.find('.dialog__close, .dialog__back');
             var $dialogForm = $dialogBody.find('.dialog__form');
             var $dialogFormChoice = $('<input type="hidden" name="choice" />');
             var $autoFocusable = $dialogWindow.find('[autofocus]');
