@@ -3,7 +3,7 @@
   "description": "jQuery plugin that creates the basic interactivity for an ARIA dialog widget.",
   "version": "0.5.1",
   "scripts": {
-    "start": "npm run lasso && parallelshell 'npm run server' 'npm run watch'",
+    "start": "npm run lasso && parallelshell \"npm run server\" \"npm run watch\"",
     "prepublish": "npm run clean && npm run lint && npm run build",
     "build": "npm run clean && npm run minify && npm run lasso",
     "clean": "rimraf lint.txt .cache build docs/browser.js.*",
