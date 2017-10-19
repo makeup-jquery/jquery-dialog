@@ -16,10 +16,6 @@
   },
   "pre-commit": "prepublish",
   "author": "Ian McBurnie <ianmcburnie@hotmail.com>",
-  "homepage": "https://github.com/ianmcburnie/jquery-dialog",
-  "bugs": {
-    "url": "https://github.com/ianmcburnie/jquery-dialog/issues"
-  },
   "keywords": [
     "jquery-plugin",
     "ecosystem:jquery",
@@ -30,32 +26,31 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ianmcburnie/jquery-dialog.git"
+    "url": "https://github.com/makeup-jquery/jquery-dialog.git"
   },
   "license": "MIT",
   "devDependencies": {
     "browser-sync": "^2",
-    "eslint": "^3",
-    "eslint-config-google": "~0.7",
+    "eslint": "^4",
+    "eslint-config-ebay": "~0.1",
     "jquery": ">=1.11",
-    "jquery-focusable": "~0.3",
-    "jquery-keyboard-trap": "~0.4",
-    "jquery-migrate": "^3",
-    "jquery-next-id": "~0.1",
-    "jquery-screenreader-trap": "~0.3",
+    "jquery-focusable": "^1",
+    "jquery-keyboard-trap": "^1",
+    "jquery-next-id": "^1",
+    "jquery-screenreader-trap": "^1",
     "jsmin": "^1",
     "lasso-cli": "^2",
     "onchange": "^3",
-    "parallelshell": "^2",
+    "parallelshell": "^3",
     "pre-commit": "^1",
     "rimraf": "^2"
   },
   "peerDependencies": {
     "jquery": ">=1.11",
-    "jquery-next-id": "~0.1",
-    "jquery-focusable": "~0.3",
-    "jquery-keyboard-trap": "~0.4",
-    "jquery-screenreader-trap": "~0.3"
+    "jquery-focusable": "^1",
+    "jquery-keyboard-trap": "^1",
+    "jquery-next-id": "^1",
+    "jquery-screenreader-trap": "^1"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

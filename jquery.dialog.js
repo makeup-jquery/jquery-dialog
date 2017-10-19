@@ -1,7 +1,7 @@
 /**
 * @file jQuery plugin that creates the basic interactivity for an ARIA dialog widget
 * @author Ian McBurnie <ianmcburnie@hotmail.com>
-* @version 0.5.1
+* @version 0.5.2
 * @requires jquery
 * @requires jquery-next-id
 * @requires jquery-focusable
@@ -21,11 +21,11 @@
             var dialogId = $dialogButton.data('jquery-dialog-button-for');
             var $dialog = $('#' + dialogId);
 
-            $dialog.on('dialogClose', function(e) {
+            $dialog.on('dialogClose', function() {
                 $dialogButton.focus();
             });
 
-            $dialogButton.on('click', function(e) {
+            $dialogButton.on('click', function() {
                 $dialog.dialog(options);
             });
         });
@@ -68,7 +68,7 @@
 
             // submit button 'click' triggers before form 'submit' event
             // use this opportunity to patch-in hidden value
-            var onFormSubmitClick = function(e) {
+            var onFormSubmitClick = function() {
                 var value = this.value || this.innerText;
                 $dialogFormChoice.attr('value', value);
             };
@@ -101,7 +101,7 @@
                 $.trapScreenreader($dialog);
 
                 // prevent keyboard user from leaving the dialog
-                $.trapKeyboard($dialog, {deactivateOnFocusExit: false});
+                $.trapKeyboard($dialog, { deactivateOnFocusExit: false });
 
                 // add hook to body for CSS
                 $body.addClass('has-dialog');
@@ -131,7 +131,7 @@
                 if (hasTransitions === true) {
                     window.clearTimeout(openTimeout);
                     $dialog.addClass('dialog--transition-out');
-                    $dialogWindow.one('transitionend', function(e) {
+                    $dialogWindow.one('transitionend', function() {
                         $dialog.removeClass('dialog--transition-out');
                         $dialog.prop('hidden', true);
                         $dialog.trigger('dialogClose', [data]);
