@@ -52,7 +52,7 @@
             var $dialogBody = $dialog.find('.dialog__body');
             var $heading = $header.find('> h2');
             var $dialogWindow = $dialog.find('.dialog__window'); // role=document is for older NVDA
-            var $closeButton = $header.find('.dialog__close, .dialog__back');
+            var $closeButton = $dialog.find('.dialog__close, .dialog__back');
             var $dialogForm = $dialogBody.find('.dialog__form');
             var $dialogFormChoice = $('<input type="hidden" name="choice" />');
             var $autoFocusable = $dialogWindow.find('[autofocus]');
